@@ -1,8 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FormItem } from './FormItem/FormItem';
 
-export const Form = ({ onSubmit, cancelForm }) => {
+export const Form = ({ onSubmitForm, cancelForm, editingContact }) => {
   const [input, setInput] = useState({
     name: '',
     lastName: '',
@@ -23,7 +23,7 @@ export const Form = ({ onSubmit, cancelForm }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(
+    onSubmitForm(
       input.name,
       input.lastName,
       input.address,
@@ -42,6 +42,14 @@ export const Form = ({ onSubmit, cancelForm }) => {
       number: '',
     });
   };
+
+  useEffect(() => {
+  setInput(editingContact)
+}, [editingContact])  
+
+  // const editContact = () => {
+  //   setInput(editingContact);
+  // }
 
   return (
     <>
@@ -92,7 +100,9 @@ export const Form = ({ onSubmit, cancelForm }) => {
         />
         <button type="button">Add</button>
         <button type="submit">Save</button>
-        <button type="button" onClick={cancelForm}>Cancel</button>
+        <button type="button" onClick={cancelForm}>
+          Cancel
+        </button>
       </form>
     </>
   );

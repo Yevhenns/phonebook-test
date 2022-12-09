@@ -8,6 +8,7 @@ function App() {
     return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
   });
   const [register, setRegister] = useState(false);
+  const [editingContact, setEditingContact] = useState({});
 
   useEffect(() => {
     if (contacts) {
@@ -50,18 +51,30 @@ function App() {
     setRegister(false);
   };
 
+  const editContact = id => {
+    setEditingContact(contacts.filter(contact => contact.id === id));
+  };
+
   return (
     <>
       <h1>Phone book</h1>
-      {
+      {!register && editingContact && (
         <Table
           addedContacts={contacts}
           deleteContact={deleteContact}
-          onClick={openForm}
+          onClickAdd={openForm}
+          onClickEdit={editContact}
         />
-      }
+      )}
       {register && (
-        <Form onSubmit={formSubmitHandler} cancelForm={cancelForm} />
+        <Form onSubmitForm={formSubmitHandler} cancelForm={cancelForm} />
+      )}
+      {editingContact && (
+        <Form
+          editingContact={editingContact}
+          onSubmitForm={formSubmitHandler}
+          cancelForm={cancelForm}
+        />
       )}
     </>
   );

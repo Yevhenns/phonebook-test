@@ -1,10 +1,17 @@
 import { nanoid } from 'nanoid';
 
-export const Table = ({ addedContacts, deleteContact, onClick }) => {
+export const Table = ({
+  addedContacts,
+  deleteContact,
+  onClickAdd,
+  onClickEdit,
+}) => {
   return (
     <>
       <h2>Contacts</h2>
-      <button type="button" onClick={onClick}>Add contact</button>
+      <button type="button" onClick={onClickAdd}>
+        Add contact
+      </button>
       <table>
         <thead>
           <tr>
@@ -30,7 +37,9 @@ export const Table = ({ addedContacts, deleteContact, onClick }) => {
               <td>{contact.email}</td>
               <td>{contact.number}</td>
               <td>
-                <button type="button">Edit</button>
+                <button type="button" onClick={() => onClickEdit(contact.id)}>
+                  Edit
+                </button>
               </td>
               <td>
                 <button type="button" onClick={() => deleteContact(contact.id)}>
