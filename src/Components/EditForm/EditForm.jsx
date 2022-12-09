@@ -1,24 +1,27 @@
 import React from 'react';
-import { useState } from 'react';
-import { FormItem } from './FormItem/FormItem';
+import { useState, useEffect } from 'react';
+import { FormItem } from '../Form/FormItem/FormItem';
 
-export const Form = ({ onSubmitForm, cancelForm }) => {
+export const EditForm = ({ onSubmitForm, cancelForm, editingContact }) => {
   const [input, setInput] = useState({
-    name: '',
-    lastName: '',
-    address: '',
-    city: '',
-    country: '',
-    email: '',
-    number: '',
+    // name: '',
+    // lastName: '',
+    // address: '',
+    // city: '',
+    // country: '',
+    // email: '',
+    // number: '',
   });
+
+  // useEffect(() => {
+  //   setInput(editingContact);
+  // }, [editingContact]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setInput(prev => ({
-      ...prev,
+    setInput({
       [name]: value,
-    }));
+    });
   };
 
   const handleSubmit = e => {
@@ -33,25 +36,30 @@ export const Form = ({ onSubmitForm, cancelForm }) => {
       input.number
     );
     setInput({
-      name: '',
-      lastName: '',
-      address: '',
-      city: '',
-      country: '',
-      email: '',
-      number: '',
+      // name: '',
+      // lastName: '',
+      // address: '',
+      // city: '',
+      // country: '',
+      // email: '',
+      // number: '',
     });
   };
 
+  // const editContact = () => {
+  //   setInput(editingContact);
+  // }
+ 
+console.log(editingContact);
   return (
     <>
-      <h2>Register new contact</h2>
+      <h2>Edit the contact</h2>
       <form onSubmit={handleSubmit}>
         <FormItem
           id={'name'}
           name={'Name'}
           onChange={handleInputChange}
-          value={input.name}
+          value={editingContact.name}
         />
         <FormItem
           id={'lastName'}

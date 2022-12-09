@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form } from './Components/Form/Form';
 import { Table } from './Components/Table/Table';
+import { EditForm } from './Components/EditForm/EditForm';
 import { nanoid } from 'nanoid';
 
 function App() {
@@ -66,16 +67,23 @@ function App() {
           onClickEdit={editContact}
         />
       )}
-      {register && (
+      <Form onSubmitForm={formSubmitHandler} cancelForm={cancelForm} />
+      <EditForm
+        editingContact={editingContact}
+        onSubmitForm={formSubmitHandler}
+        cancelForm={cancelForm}
+      />
+
+      {/* {register && (
         <Form onSubmitForm={formSubmitHandler} cancelForm={cancelForm} />
-      )}
-      {editingContact && (
+      )} */}
+      {/* {editingContact && (
         <Form
           editingContact={editingContact}
           onSubmitForm={formSubmitHandler}
           cancelForm={cancelForm}
         />
-      )}
+      )} */}
     </>
   );
 }
