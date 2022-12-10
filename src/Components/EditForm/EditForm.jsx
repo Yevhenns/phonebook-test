@@ -50,8 +50,6 @@ export const EditForm = ({ onSubmitForm, cancelForm, editContact }) => {
     });
   };
 
-  console.log(input);
-
   return (
     <>
       {editContact && (
