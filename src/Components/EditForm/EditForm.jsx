@@ -2,24 +2,28 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { FormItem } from '../Form/FormItem/FormItem';
 
-export const EditForm = ({ onSubmitForm, cancelForm, editingContact }) => {
+export const EditForm = ({ onSubmitForm, cancelForm, editContact }) => {
   const [input, setInput] = useState({
-    // name: '',
-    // lastName: '',
-    // address: '',
-    // city: '',
-    // country: '',
-    // email: '',
-    // number: '',
+    name: '',
+    lastName: '',
+    address: '',
+    city: '',
+    country: '',
+    email: '',
+    number: '',
   });
 
-  // useEffect(() => {
-  //   setInput(editingContact);
-  // }, [editingContact]);
+  useEffect(() => {
+    if (!editContact) {
+      return;
+    }
+    setInput(editContact);
+  }, [editContact]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
     setInput({
+      ...input,
       [name]: value,
     });
   };
@@ -36,74 +40,75 @@ export const EditForm = ({ onSubmitForm, cancelForm, editingContact }) => {
       input.number
     );
     setInput({
-      // name: '',
-      // lastName: '',
-      // address: '',
-      // city: '',
-      // country: '',
-      // email: '',
-      // number: '',
+      name: '',
+      lastName: '',
+      address: '',
+      city: '',
+      country: '',
+      email: '',
+      number: '',
     });
   };
 
-  // const editContact = () => {
-  //   setInput(editingContact);
-  // }
- 
-console.log(editingContact);
+  console.log(input);
+
   return (
     <>
-      <h2>Edit the contact</h2>
-      <form onSubmit={handleSubmit}>
-        <FormItem
-          id={'name'}
-          name={'Name'}
-          onChange={handleInputChange}
-          value={editingContact.name}
-        />
-        <FormItem
-          id={'lastName'}
-          name={'Last Name'}
-          onChange={handleInputChange}
-          value={input.lastName}
-        />
-        <FormItem
-          id={'address'}
-          name={'Address'}
-          onChange={handleInputChange}
-          value={input.address}
-        />
-        <FormItem
-          id={'city'}
-          name={'City'}
-          onChange={handleInputChange}
-          value={input.city}
-        />
-        <FormItem
-          id={'country'}
-          name={'Country'}
-          onChange={handleInputChange}
-          value={input.country}
-        />
-        <FormItem
-          id={'email'}
-          name={'Email'}
-          onChange={handleInputChange}
-          value={input.email}
-        />
-        <button type="button">Add</button>
-        <FormItem
-          id={'number'}
-          name={'Number'}
-          onChange={handleInputChange}
-          value={input.number}
-        />
-        <button type="button">Add</button>
-        <button type="submit">Save</button>
-        <button type="button" onClick={cancelForm}>
-          Cancel
-        </button>
-      </form>
+      {editContact && (
+        <>
+          <h2>Edit the contact</h2>
+          <form onSubmit={handleSubmit}>
+            <FormItem
+              id={'name'}
+              name={'Name'}
+              onChange={handleInputChange}
+              value={input.name}
+            />
+            <FormItem
+              id={'lastName'}
+              name={'Last Name'}
+              onChange={handleInputChange}
+              value={input.lastName}
+            />
+            <FormItem
+              id={'address'}
+              name={'Address'}
+              onChange={handleInputChange}
+              value={input.address}
+            />
+            <FormItem
+              id={'city'}
+              name={'City'}
+              onChange={handleInputChange}
+              value={input.city}
+            />
+            <FormItem
+              id={'country'}
+              name={'Country'}
+              onChange={handleInputChange}
+              value={input.country}
+            />
+            <FormItem
+              id={'email'}
+              name={'Email'}
+              onChange={handleInputChange}
+              value={input.email}
+            />
+            <button type="button">Add</button>
+            <FormItem
+              id={'number'}
+              name={'Number'}
+              onChange={handleInputChange}
+              value={input.number}
+            />
+            <button type="button">Add</button>
+            <button type="submit">Save</button>
+            <button type="button" onClick={cancelForm}>
+              Cancel
+            </button>
+          </form>
+        </>
+      )}
     </>
   );
 };

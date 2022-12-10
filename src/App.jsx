@@ -56,6 +56,8 @@ function App() {
     setEditingContact(contacts.filter(contact => contact.id === id));
   };
 
+  const con = editingContact[0];
+
   return (
     <>
       <h1>Phone book</h1>
@@ -69,7 +71,7 @@ function App() {
       )}
       <Form onSubmitForm={formSubmitHandler} cancelForm={cancelForm} />
       <EditForm
-        editingContact={editingContact}
+        editContact={con}
         onSubmitForm={formSubmitHandler}
         cancelForm={cancelForm}
       />
