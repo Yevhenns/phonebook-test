@@ -23,8 +23,7 @@ export const EditForm = ({
       return;
     }
     setInput(editContact);
-  }, [editContact]
-  );
+  }, [editContact]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -56,8 +55,6 @@ export const EditForm = ({
       number: '',
     });
   };
-
-  // console.log(input)
 
   return (
     <>

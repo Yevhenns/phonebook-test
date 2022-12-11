@@ -16,7 +16,7 @@ function App() {
     if (contacts) {
       window.localStorage.setItem('contacts', JSON.stringify(contacts));
     }
-  }, [contacts]);
+  });
 
   const formSubmitHandler = (
     name,
@@ -60,21 +60,27 @@ function App() {
 
   const editingFormContact = editingContact[0];
 
-  const handleEditFormSubmit = contact => {
-    // const editedContact = contact;
-    // const newContacts = [...contacts];
-
+  const handleEditFormSubmit = (
+    name,
+    lastName,
+    address,
+    city,
+    country,
+    email,
+    number
+  ) => {
+    const editedContact = {
+      id: contactId,
+      name,
+      lastName,
+      address,
+      city,
+      country,
+      email,
+      number,
+    };
     const index = contacts.findIndex(contact => contact.id === contactId);
-
-    // console.log(index)
-
-    const editedContact = contacts.splice(index, 1, contact)
-
-    contact && console.log(contact);
-
-    // newContacts[index] = editedContact;
-
-    // setContacts(newContacts);
+    contacts.splice(index, 1, editedContact);
     setContactId(null);
   };
 
