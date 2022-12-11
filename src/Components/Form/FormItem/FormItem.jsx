@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const FormItem = ({ name, value, id, onChange }) => {
   return (
@@ -15,3 +16,10 @@ export const FormItem = ({ name, value, id, onChange }) => {
     </label>
   );
 };
+
+FormItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+}

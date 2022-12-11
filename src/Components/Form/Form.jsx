@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { FormItem } from './FormItem/FormItem';
+import PropTypes from 'prop-types';
 
 export const Form = ({
   text,
@@ -116,4 +117,10 @@ export const Form = ({
       </form>
     </>
   );
+};
+
+Form.propTypes = {
+  text: PropTypes.string.isRequired,
+  onSubmitForm: PropTypes.func.isRequired,
+  cancelForm: PropTypes.func.isRequired,
 };

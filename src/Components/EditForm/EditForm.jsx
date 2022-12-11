@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { FormItem } from '../Form/FormItem/FormItem';
+import PropTypes from 'prop-types';
 
 export const EditForm = ({
   text,
@@ -125,4 +126,11 @@ export const EditForm = ({
       </form>
     </>
   );
+};
+
+EditForm.propTypes = {
+  text: PropTypes.string.isRequired,
+  onEditSubmitForm: PropTypes.func.isRequired,
+  cancelForm: PropTypes.func.isRequired,
+  editContact: PropTypes.objectOf(PropTypes.string),
 };
