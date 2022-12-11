@@ -8,6 +8,7 @@ export const EditForm = ({
   cancelForm,
   editContact,
   onEditSubmitForm,
+  addInput,
 }) => {
   const [input, setInput] = useState({
     name: '',

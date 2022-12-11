@@ -9,6 +9,8 @@ function App() {
     return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
   });
   const [register, setRegister] = useState(false);
+  const [edit, setEdit] = useState(false);
+
   const [editingContact, setEditingContact] = useState({});
   const [contactId, setContactId] = useState(null);
 
@@ -39,6 +41,7 @@ function App() {
     };
     setContacts([newContact, ...contacts]);
     setRegister(false);
+    setEdit(false);
   };
 
   const deleteContact = id => {
@@ -51,11 +54,13 @@ function App() {
 
   const cancelForm = () => {
     setRegister(false);
+    setEdit(false);
   };
 
   const editContact = id => {
     setEditingContact(contacts.filter(contact => contact.id === id));
     setContactId(id);
+    setEdit(true);
   };
 
   const editingFormContact = editingContact[0];
@@ -82,12 +87,15 @@ function App() {
     const index = contacts.findIndex(contact => contact.id === contactId);
     contacts.splice(index, 1, editedContact);
     setContactId(null);
+
+    setRegister(false);
+    setEdit(false);
   };
 
   return (
     <>
       <h1>Phone book</h1>
-      {!register && editingContact && (
+      {!register && !edit && (
         <Table
           addedContacts={contacts}
           deleteContact={deleteContact}
@@ -95,17 +103,21 @@ function App() {
           onClickEdit={editContact}
         />
       )}
-      <Form
-        text="Register a new contact"
-        onSubmitForm={formSubmitHandler}
-        cancelForm={cancelForm}
-      />
-      <EditForm
-        text="Edit the contact"
-        editContact={editingFormContact}
-        onEditSubmitForm={handleEditFormSubmit}
-        cancelForm={cancelForm}
-      />
+      {register && (
+        <Form
+          text="Register a new contact"
+          onSubmitForm={formSubmitHandler}
+          cancelForm={cancelForm}
+        />
+      )}
+      {edit && (
+        <EditForm
+          text="Edit the contact"
+          editContact={editingFormContact}
+          onEditSubmitForm={handleEditFormSubmit}
+          cancelForm={cancelForm}
+        />
+      )}
     </>
   );
 }
