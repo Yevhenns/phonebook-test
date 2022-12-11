@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form } from './Components/Form/Form';
 import { Table } from './Components/Table/Table';
-// import { EditForm } from './Components/EditForm/EditForm';
+import { EditForm } from './Components/EditForm/EditForm';
 import { nanoid } from 'nanoid';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
   });
   const [register, setRegister] = useState(false);
   const [editingContact, setEditingContact] = useState({});
+  const [contactId, setContactId] = useState(null);
 
   useEffect(() => {
     if (contacts) {
@@ -54,9 +55,28 @@ function App() {
 
   const editContact = id => {
     setEditingContact(contacts.filter(contact => contact.id === id));
+    setContactId(id);
   };
 
-  const con = editingContact[0];
+  const editingFormContact = editingContact[0];
+
+  const handleEditFormSubmit = contact => {
+    // const editedContact = contact;
+    // const newContacts = [...contacts];
+
+    const index = contacts.findIndex(contact => contact.id === contactId);
+
+    // console.log(index)
+
+    const editedContact = contacts.splice(index, 1, contact)
+
+    contact && console.log(contact);
+
+    // newContacts[index] = editedContact;
+
+    // setContacts(newContacts);
+    setContactId(null);
+  };
 
   return (
     <>
@@ -70,14 +90,14 @@ function App() {
         />
       )}
       <Form
-        text="Register new contact"
+        text="Register a new contact"
         onSubmitForm={formSubmitHandler}
         cancelForm={cancelForm}
       />
-      <Form
+      <EditForm
         text="Edit the contact"
-        editContact={con}
-        onSubmitForm={formSubmitHandler}
+        editContact={editingFormContact}
+        onEditSubmitForm={handleEditFormSubmit}
         cancelForm={cancelForm}
       />
     </>
