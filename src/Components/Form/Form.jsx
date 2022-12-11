@@ -1,8 +1,12 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FormItem } from './FormItem/FormItem';
 
-export const Form = ({ text, onSubmitForm, cancelForm, editContact }) => {
+export const Form = ({
+  text,
+  onSubmitForm,
+  cancelForm,
+}) => {
   const [input, setInput] = useState({
     name: '',
     lastName: '',
@@ -12,13 +16,6 @@ export const Form = ({ text, onSubmitForm, cancelForm, editContact }) => {
     email: '',
     number: '',
   });
-
-  useEffect(() => {
-    if (!editContact) {
-      return;
-    }
-    setInput(editContact);
-  }, [editContact]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
